@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoats Notes</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        textarea {
+            width: 80%;
+            height: 500px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to Stoats Notes!</h2>
+    <form>
+        <textarea id="note" name="note">
+
+        </textarea>
+        <br>
+        <button id="note-save" type="button">Save</button><span id="save-message"></span>
+    </form>
+    <script>
+        fetch("http://localhost:3000/note")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("note").value = data.noteContent;
+        });
+
+        document.getElementById("note-save").addEventListener("click", (event) => {
+            event.preventDefault();
+            const note = document.getElementById("note").value;
+            fetch("http://localhost:3000/note", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({note})
+            }).then(res => {
+                if (res.ok) {
+                    document.getElementById("save-message").innerHTML = "Note saved!";
+                    setTimeout(() => {
+                        document.getElementById("save-message").innerHTML = "";
+                    }, 3000);
+                } else {
+                    document.getElementById("save-message").innerHTML = "An unexpected error occurred.";
+                    setTimeout(() => {
+                        document.getElementById("save-message").innerHTML = "";
+                    }, 10000);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

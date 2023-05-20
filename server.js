@@ -9,11 +9,16 @@ const tableName = 'Notes';
 
 const secrets = JSON.parse(fs.readFileSync('secrets.json').toString());
 
+const mode = "production"; // "development" or "production"
+
+const dbHost = mode === "production" ? "stoatsnotes.db" : "localhost";
+const dbUser = mode === "production" ? "davidnbooth" : "root";
+
 async function main() {
     ////// Set up MySQL /////
     const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
+        host: dbHost,
+        user: dbUser,
         password: secrets.sql_password,
         database: 'stoats'
     })

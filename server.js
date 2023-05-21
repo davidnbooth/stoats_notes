@@ -9,7 +9,7 @@ const tableName = 'Notes';
 
 const secrets = JSON.parse(fs.readFileSync('secrets.json').toString());
 
-const mode = "production"; // "development" or "production"
+const mode = "development"; // "development" or "production"
 
 const dbHost = mode === "production" ? "stoatsnotes.db" : "localhost";
 const dbUser = mode === "production" ? "davidnbooth" : "root";
@@ -86,7 +86,7 @@ async function main() {
         <button id="note-save" type="button">Save</button><span id="save-message"></span>
     </form>
     <script>
-        fetch("http://localhost:3000/note")
+        fetch("/note")
         .then(res => res.json())
         .then(data => {
             document.getElementById("note").value = data.noteContent;
@@ -95,7 +95,7 @@ async function main() {
         document.getElementById("note-save").addEventListener("click", (event) => {
             event.preventDefault();
             const note = document.getElementById("note").value;
-            fetch("http://localhost:3000/note", {
+            fetch("/note", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

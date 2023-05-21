@@ -1,6 +1,7 @@
 const fs = require('fs');
 const express = require('express'); 
 const mysql = require('mysql2/promise');
+const os = require('os');
 
 const app = express();
 const expressPort = 3000;
@@ -9,7 +10,7 @@ const tableName = 'Notes';
 
 const secrets = JSON.parse(fs.readFileSync('secrets.json').toString());
 
-const mode = "development"; // "development" or "production"
+const mode = os.hostname().includes("nfshost") ? "production" : "development";
 
 const dbHost = mode === "production" ? "stoatsnotes.db" : "localhost";
 const dbUser = mode === "production" ? "davidnbooth" : "root";

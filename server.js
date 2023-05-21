@@ -24,6 +24,7 @@ async function main() {
         database: 'stoats'
     })
     await connection.connect()
+    await connection.query(`CREATE TABLE IF NOT EXISTS ${tableName} (NoteID INT PRIMARY KEY, Content TEXT)`);
 
 
     ////// Set up Express /////

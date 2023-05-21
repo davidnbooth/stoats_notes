@@ -5,7 +5,8 @@ Barebones notes app
 idk how to organize the folders yet
 
 
-node 18
+node 16
+mariadb 10.6
 
 
 to set up:
@@ -16,9 +17,11 @@ npm install
 
 To run:
 ```
-node server.js
+npm run start
 ```
 and open index.html
+
+You can also run the server with the "Server" launch process in vscode, for debugging.
 
 
 wanna do the joel spolsky hungarian thing for safe and unsafe strings
@@ -28,14 +31,10 @@ wanna do the joel spolsky hungarian thing for safe and unsafe strings
 
 db:
 
-I installed mysql and mysql workbench
+I installed mariadb and mysql workbench
 in mysql workbench:
 ```
 SHOW DATABASES
 CREATE DATABASE stoats
 USE stoats
-CREATE TABLE Notes (
-    NoteID int,
-    Content varchar(10000)
-)
 ```

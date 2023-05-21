@@ -1,7 +1,10 @@
-const fs = require('fs');
-const express = require('express'); 
-const mysql = require('mysql2/promise');
-const os = require('os');
+// Node
+import fs from "fs";
+import os from "os";
+
+// npm
+import express from "express";
+import mariadb from "mariadb";
 
 const app = express();
 const expressPort = 3000;
@@ -13,17 +16,17 @@ const secrets = JSON.parse(fs.readFileSync('secrets.json').toString());
 const mode = os.hostname().includes("nfshost") ? "production" : "development";
 
 const dbHost = mode === "production" ? "stoatsnotes.db" : "localhost";
-const dbUser = mode === "production" ? "davidnbooth" : "root";
+const dbUser = "davidnbooth";
 
 async function main() {
     ////// Set up MySQL /////
-    const connection = await mysql.createConnection({
+    const pool = await mariadb.createPool({
         host: dbHost,
         user: dbUser,
         password: secrets.sql_password,
         database: 'stoats'
     })
-    await connection.connect()
+    const connection = await pool.getConnection()
     await connection.query(`CREATE TABLE IF NOT EXISTS ${tableName} (NoteID INT PRIMARY KEY, Content TEXT)`);
 
 
@@ -123,22 +126,22 @@ async function main() {
 `
         )
     });
+
     app.get('/note', async (req, res) => {
         const noteQueryResult = await connection.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
 
-        let noteContent = 'Your note here';
-        if (noteQueryResult[0].length === 0) {
-            await connection.query(`INSERT INTO ${tableName} (NoteID, Note) VALUES (${noteId}, ${noteContent})`);
+        let noteContent = '"Your note here"';
+        if (!noteQueryResult[0]?.Content) {
+            await connection.query(`INSERT INTO ${tableName} (NoteID, Content) VALUES (${noteId}, ${noteContent})`);
         } 
 
-        noteContent = noteQueryResult[0][0].Content;
+        noteContent = noteQueryResult[0].Content;
         
         res.send({noteContent})
     });
 
     app.post('/note', async (req, res) => {
         const uNote = req.body.note;
-        note = uNote;
         await connection.query(`UPDATE ${tableName} SET Content = '${uNote}' WHERE NoteID = ${noteId}`);
 
         res.send(204);

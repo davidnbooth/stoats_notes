@@ -1,16 +1,23 @@
+$bg-color: #1A120B;
+$structure-color: #3C2A21;
+$accent-color: #D5CEA3;
+$text-color: #E5E5CB;
+
 #note {
     width: 80%;
     height: 500px;
-    border: 1px solid #ccc;
+    border: 1px solid $structure-color;
     padding: 10px;
     font-size: 16px;
+    background-color: $bg-color;
+    color: $text-color;
 }
 
 #note-save {
     padding: 10px;
     font-size: 16px;
-    background: #333;
-    color: #fff;
+    background: $accent-color;
+    color: $bg-color;
     border: none;
     cursor: pointer;
 }

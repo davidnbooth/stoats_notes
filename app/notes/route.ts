@@ -1,4 +1,5 @@
-import dbAccess from '../../lib/dbAccess'
+import DBConnection from '../../lib/DBConnection'
+import Logger from '../../lib/Logger'
 
 const tableName = "Notes"
 const noteId = 1;
@@ -7,8 +8,10 @@ export async function POST(request: Request) {
     const body = await request.json();
     const noteContent = body.note;
 
-    const db = await dbAccess.getConnection("development", {sql_user: "davidnbooth", sql_password:"joecoolsunset"})
+    const db = await DBConnection.getConnection();
+    throw new Error("Not implemented")
     await db.query(`UPDATE ${tableName} SET Content = '${noteContent}' WHERE NoteID = ${noteId}`);
+    Logger.info(`note saved at ${(new Date()).toISOString()}`)
 
     return new Response(noteContent)
 }

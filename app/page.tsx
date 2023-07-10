@@ -1,12 +1,13 @@
 import styles from './page.module.scss'
 
-import dbAccess from '../lib/dbAccess'
+import DBConnection from '../lib/DBConnection'
+import Logger from '../lib/Logger'
 
 const noteId = 1;
 const tableName = 'Notes';
 
 export default async function Home({}) {
-    const db = await dbAccess.getConnection("development", {sql_user: "davidnbooth", sql_password:"joecoolsunset"})
+    const db = await DBConnection.getConnection("development")
     
     const noteQueryResult = await db.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
 

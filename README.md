@@ -36,12 +36,9 @@ Then you can open localhost:3000
 Start the launch process in vscode.
 
 
+**To run not-as-debug:**
+`npm run build`
+`npm run start`
 
 ## How to deploy on NearlyFreeSpeech
 
-
-## To Do:
-
-wanna do the joel spolsky hungarian thing for safe and unsafe strings
-idk how to organize the folders yet
-How do u pass values into script files that go client side?

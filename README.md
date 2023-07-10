@@ -2,39 +2,46 @@
 Barebones notes app
 
 
-idk how to organize the folders yet
-
-
-node 16
+**Versions used:**
+node 16.18.1
 mariadb 10.6
 
 
-to set up:
+**To set up for the first time:**
 ```
 npm install
 ```
+Install mariadb, or get the connection info for an existing deployment.  
+Put a file in the root of the project workspace that looks like this:
 
-
-To run:
+secrets.json
 ```
-npm run start
+{
+    "sql_password": "<MY_SQL_PASSWORD>",
+    "sql_user": "<MY_SQL_USERNAME>"
+}
 ```
-and open index.html
+Make sure the user you're using can create, edit, and read tables and their data.
+Make sure the MariaDB has a database called `stoats`.
 
-You can also run the server with the "Server" launch process in vscode, for debugging.
 
+**To run:**
+```
+npm run dev
+```
+Then you can open localhost:3000
+
+
+**To debug:**
+Start the launch process in vscode.
+
+
+
+## How to deploy on NearlyFreeSpeech
+
+
+## To Do:
 
 wanna do the joel spolsky hungarian thing for safe and unsafe strings
-
-
-
-
-db:
-
-I installed mariadb and mysql workbench
-in mysql workbench:
-```
-SHOW DATABASES
-CREATE DATABASE stoats
-USE stoats
-```
+idk how to organize the folders yet
+How do u pass values into script files that go client side?

@@ -10,8 +10,8 @@ module.exports = {
             autorestart: true,
             watch: true,
             merge_logs: true,
-            out_file:  "./pm2_out.log",
-            error_file:  "./pm2_err.log",
+            out_file:  "./logs/pm2_out.log",
+            error_file:  "./logs/pm2_err.log",
             log_date_format: "ddd, MMMM D YYYY, HH:mm:ss Z"
         }
     ]

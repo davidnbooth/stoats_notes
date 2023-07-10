@@ -1,0 +1,1 @@
+How do u pass values into script files that go client side?

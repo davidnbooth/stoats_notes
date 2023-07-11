@@ -13,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <div id="follower"></div>
+        <script defer src="/follower.js" />
+      </body>
     </html>
   )
 }

@@ -1,7 +1,5 @@
 - Set up 500 page
 
-- add a cursor follower
-
 - Get linting set up: understand where the lint rules are coming from, document that, set up rules for semicolons and function parameter/return types.
 
 - Next.js:  How do u pass values into script files that go client side?
@@ -17,7 +15,5 @@
    - auto-restart on git push
 
 - add NFS hosting instructions to readme
-
-- favicon
 
 - wanna do the joel spolsky hungarian thing for safe and unsafe strings

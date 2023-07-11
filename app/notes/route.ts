@@ -9,9 +9,8 @@ export async function POST(request: Request) {
     const noteContent = body.note;
 
     const db = await DBConnection.getConnection();
-    throw new Error("Not implemented")
     await db.query(`UPDATE ${tableName} SET Content = '${noteContent}' WHERE NoteID = ${noteId}`);
-    Logger.info(`note saved at ${(new Date()).toISOString()}`)
+    Logger.info(`note saved at ${(new Date()).toISOString()}`);
 
-    return new Response(noteContent)
+    return new Response(noteContent);
 }

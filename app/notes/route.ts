@@ -6,11 +6,11 @@ const noteId = 1;
 
 export async function POST(request: Request) {
     const body = await request.json();
-    const noteContent = body.note;
+    const usNoteContent = body.note;
 
     const db = await DBConnection.getConnection();
-    await db.query(`UPDATE ${tableName} SET Content = '${noteContent}' WHERE NoteID = ${noteId}`);
+    await db.query(`UPDATE ${tableName} SET Content = '${usNoteContent}' WHERE NoteID = ${noteId}`);
     Logger.info(`note saved at ${(new Date()).toISOString()}`);
 
-    return new Response(noteContent);
+    return new Response(usNoteContent);
 }

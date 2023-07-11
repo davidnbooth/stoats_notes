@@ -13,5 +13,3 @@
    - auto-restart on git push
 
 - add NFS hosting instructions to readme
-
-- wanna do the joel spolsky hungarian thing for safe and unsafe strings

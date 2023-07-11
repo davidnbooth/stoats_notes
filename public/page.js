@@ -5,7 +5,7 @@ const note = document.querySelector("textarea");
 saveButton.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const noteContent = note.value;
+    const usNoteContent = note.value;
     const handleError = (error) => {
         console.warn(error);
         saveMessage.innerText = "Error!";
@@ -28,7 +28,7 @@ saveButton.addEventListener("click", (event) => {
 
     fetch("/notes", {
         method: "POST",
-        body: JSON.stringify({ note: noteContent }),
+        body: JSON.stringify({ note: usNoteContent }),
         headers: {
             "Content-Type": "application/json"
         }

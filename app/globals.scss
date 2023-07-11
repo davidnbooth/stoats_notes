@@ -24,6 +24,7 @@ body {
   );
   animation: rotate 30s infinite;
   filter: blur(200px);
+  pointer-events: none;
 }
 
 @keyframes rotate {

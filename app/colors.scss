@@ -1,0 +1,29 @@
+// We're using the same color scheme for light mode and dark mode but that could change
+
+// https://colorhunt.co/palette/1b243051557e816797d6d5a8
+@media (prefers-color-scheme: dark) {
+    $bg-color: #1B2430;
+    $structure-color: #51557E;
+    $accent-color: #816797;
+    $text-color: #D6D5A8;
+    $success-text-color: rgb(24, 97, 24);
+}
+$bg-color: #1B2430;
+$structure-color: #51557E;
+$accent-color: #816797;
+$text-color: #D6D5A8;
+$success-text-color: rgb(24, 97, 24);
+
+// $bg-color: #1A120B;
+// $structure-color: #3C2A21;
+// $accent-color: #D5CEA3;
+// $text-color: #E5E5CB;
+// $success-text-color: darkgreen;
+
+// https://colorhunt.co/palette/fffad7ffe4a7ff90bbff2171
+// $bg-color: #FFFAD7;
+// $structure-color: #FFE4A7;
+// $accent-color: #FF90BB;
+// $text-color: #FF2171;
+// $success-text-color: lime;
+

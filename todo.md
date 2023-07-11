@@ -1,15 +1,9 @@
 - Get linting set up: understand where the lint rules are coming from, document that, set up rules for semicolons and function parameter/return types.
-- Get dark mode css stuff set up
 - Figure out how to test the error route
 - add a cursor follower
-- Style the 404 page.  Bonus: do a parallax effect like the github one.
-- Figure out how to have the color palette in just one file
-- Fix the style when you click into the textarea
-- Pick a color palette that doesnt suck
 - Next.js:  How do u pass values into script files that go client side?
-- Set up 500 and 404 pages
-- Add Logger library
-- Log exits
+- Set up 500 page
+- Add logging to routes
 - Log all requests
 - pm2 setup with local install
    - auto-restart on crash

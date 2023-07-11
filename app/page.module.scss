@@ -1,7 +1,4 @@
-$bg-color: #1A120B;
-$structure-color: #3C2A21;
-$accent-color: #D5CEA3;
-$text-color: #E5E5CB;
+@import "colors.scss";
 
 #note {
     width: 80%;
@@ -16,13 +13,13 @@ $text-color: #E5E5CB;
 #note-save {
     padding: 10px;
     font-size: 16px;
-    background: $accent-color;
+    background-color: $accent-color;
     color: $bg-color;
     border: none;
     cursor: pointer;
 }
 
 #save-message {
-    color: green;
+    color: $success-text-color;
     padding-left: 10px;
 }

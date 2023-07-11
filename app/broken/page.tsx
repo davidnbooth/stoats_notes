@@ -1,4 +1,5 @@
-import DBConnection from '../../lib/DBConnection'
+import DBConnection from '../../lib/DBConnection';
+import Logger from "../../lib/Logger";
 
 
 export default async function Home({}) {
@@ -6,6 +7,7 @@ export default async function Home({}) {
     // It won't show up in production, because the error is thrown during the build process
     // const db = await DBConnection.getConnection()
     // await db.query(`INSERT INTOzzzz Notes (NoteID, Content) VALUES (1, "Your note here")`);  // invalid SQL
+    Logger.info(`${(new Date()).toISOString()}: Broken page viewed`)
 
     return (
         <main>

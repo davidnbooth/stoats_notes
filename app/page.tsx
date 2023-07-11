@@ -7,7 +7,7 @@ const noteId = 1;
 const tableName = 'Notes';
 
 export default async function Home({}) {
-    const db = await DBConnection.getConnection("development")
+    const db = await DBConnection.getConnection()
     
     const noteQueryResult = await db.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
 

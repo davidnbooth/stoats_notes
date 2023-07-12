@@ -41,4 +41,15 @@ Start the launch process in vscode.
 `npm run start`
 
 ## How to deploy on NearlyFreeSpeech
+`git remote -v` to see remotes verbosely.  
+You can see the name of the nearlyfreespeech one.  
+`git push <remote_name>`
+  
+ssh into the server.  
+`cd /home/protected`. 
+The new code will already be here from the push.
+`npm install` (if needed)
+`npm run build`
 
+On the NFS console:
+restart the daemon

@@ -22,7 +22,6 @@ const DBConnection = {
             database: "stoats"
         };
 
-        console.log(JSON.stringify(connectionOptions));
         const pool = await createPool(connectionOptions);
         const connection = await pool.getConnection();
         await connection.query(`CREATE TABLE IF NOT EXISTS ${tableName || defaultTableName} (NoteID INT PRIMARY KEY, Content TEXT)`);

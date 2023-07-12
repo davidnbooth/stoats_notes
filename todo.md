@@ -1,9 +1,7 @@
-- Get linting set up: understand where the lint rules are coming from, document that, set up rules for semicolons and function parameter/return types.
+- Set up typescript rules for function parameters and return types.
 
 - Next.js:  How do u pass values into script files that go client side?
-
-- Add logging to routes
-- Log all requests
+- Next.js:  How do u log all incoming requests to server?
 
 - Add Logging to the daemon
 

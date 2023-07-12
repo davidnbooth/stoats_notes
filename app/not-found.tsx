@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import styles from './not-found.module.scss'
-import Logger from "../lib/Logger" 
+import Link from "next/link";
+import styles from "./not-found.module.scss";
+import Logger from "../lib/Logger"; 
 
 export default function NotFound() {
-    Logger.info(`${(new Date()).toISOString()}: 404 | Not Found`)
+    Logger.info(`${(new Date()).toISOString()}: 404 | Not Found`);
 
     return (
         <div id={styles["container"]}>
@@ -13,5 +13,5 @@ export default function NotFound() {
                 <p><Link href="/" id={styles["home-link"]}>Return to Home</Link></p>
             </div>
         </div>
-    )
+    );
 }

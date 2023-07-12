@@ -1,39 +1,39 @@
-import { PoolConnection } from "mariadb"
-import styles from './page.module.scss'
+import { PoolConnection } from "mariadb";
+import styles from "./page.module.scss";
 
-import DBConnection from '../lib/DBConnection'
-import Logger from '../lib/Logger'
+import DBConnection from "../lib/DBConnection";
+import Logger from "../lib/Logger";
 
 const noteId = 1;
-const tableName = 'Notes';
+const tableName = "Notes";
 
 export default async function Home({}) {
-    Logger.info(`${(new Date()).toISOString()}: Home - visited`)
+    Logger.info(`${(new Date()).toISOString()}: Home - visited`);
     let db: PoolConnection;
     try {
-        db = await DBConnection.getConnection()
+        db = await DBConnection.getConnection();
     } catch (err) {
-        const newErr = new Error(`${(new Date()).toISOString()}: Home - error connecting to DB`, {cause: err})
-        Logger.error(newErr)
-        throw newErr
+        const newErr = new Error(`${(new Date()).toISOString()}: Home - error connecting to DB`, {cause: err});
+        Logger.error(newErr);
+        throw newErr;
     }
-    Logger.info(`${(new Date()).toISOString()}: Home - connected to DB`)
+    Logger.info(`${(new Date()).toISOString()}: Home - connected to DB`);
     
     let noteQueryResult: any;  // TODO
     try {
         noteQueryResult = await db.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
     } catch (err) {
-        const newErr = new Error(`${(new Date()).toISOString()}: Home - error querying DB for note content`, {cause: err})
-        Logger.error(newErr)
-        throw newErr
+        const newErr = new Error(`${(new Date()).toISOString()}: Home - error querying DB for note content`, {cause: err});
+        Logger.error(newErr);
+        throw newErr;
     }
 
-    let usNoteContent = '"Your note here"';
+    let usNoteContent = "\"Your note here\"";
     if (!noteQueryResult[0]?.Content) {
         await db.query(`INSERT INTO ${tableName} (NoteID, Content) VALUES (${noteId}, ${usNoteContent})`);
     } 
     usNoteContent = noteQueryResult[0].Content;
-    Logger.info(`${(new Date()).toISOString()}: Home - established note content, rendering view`)
+    Logger.info(`${(new Date()).toISOString()}: Home - established note content, rendering view`);
 
     return (
         <main>
@@ -46,5 +46,5 @@ export default async function Home({}) {
             </form>
             <script src="/page.js" />
         </main>
-    )
+    );
 }

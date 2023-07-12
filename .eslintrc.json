@@ -1,3 +1,17 @@
 {
-    "extends": "next"
+    "extends": [
+        "eslint:recommended",
+        "next"
+    ],
+    "rules" : {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"],
+        "no-unused-vars": "off",
+        "no-empty-pattern": "off",
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "linebreak-style": ["error", "unix"],
+        "no-unexpected-multiline": ["error"],
+        "no-var": ["error"],
+        "prefer-const": ["error"]
+    }
 }

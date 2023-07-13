@@ -44,7 +44,7 @@ export default async function Home({}) {
                 <br />
                 <button id={styles["note-save"]} type="button">Save</button><span id={styles["save-message"]}></span>
             </form>
-            <script src="/page.js" />
+            <script defer src="/page.js" />
         </main>
     );
 }

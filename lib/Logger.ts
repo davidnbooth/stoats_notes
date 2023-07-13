@@ -1,10 +1,8 @@
 import process from "process";
+import pino from "pino";
 
-const Logger = {
-    error: console.error,
-    warn: console.warn,
-    info: console.log
-};
+const Logger = pino();
+
 
 // Nice exit handling (logs uncaught errors!)
 // Taken from: https://blog.heroku.com/best-practices-nodejs-errors

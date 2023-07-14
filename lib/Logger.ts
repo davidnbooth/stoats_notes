@@ -7,7 +7,7 @@ const fileName = "logs/log.log";
 
 /**
  * makes an error object (potentially with nested "cause" objects) into one big string
- * @param {Error} error the error object 
+ * @param {myError} error the error object 
  * @param {number} [recursionLevel] internal use for recursion, should be zero or undefined when you call this
  * @returns {string}
  */
@@ -29,9 +29,9 @@ const errorStringAssembler = (error: Error, recursionLevel?: number) => {
     }
 
     // Recursive call for handling Error causes
-    if (error.cause) {
-        outString += errorStringAssembler(error.cause, recursionLevel + 1);
-    }
+    // if (error.cause) {
+    //     outString += errorStringAssembler(error.cause, recursionLevel + 1);
+    // }
     return outString;
 };
 

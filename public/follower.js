@@ -1,4 +1,4 @@
-const follower = document.getElementById('follower');
+const follower = document.getElementById("follower");
 
 document.body.onpointermove = (event) => {
     const { clientX, clientY } = event;
@@ -6,7 +6,7 @@ document.body.onpointermove = (event) => {
         follower.animate({
             left: `${clientX}px`,
             top: `${clientY}px`
-        }, { duration: 1500, fill: 'forwards' })
+        }, { duration: 1500, fill: "forwards" });
     }
-}
+};
 

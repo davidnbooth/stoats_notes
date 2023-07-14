@@ -12,19 +12,19 @@ saveButton.addEventListener("click", (event) => {
         setTimeout(() => {
             saveMessage.innerText = "";
         }, 3000);
-    }
+    };
 
     const handleSuccess = (response) => {
         if (!response.ok) {
             handleError(response.statusText);
-            return
+            return;
         }
 
         saveMessage.innerText = "Saved!";
         setTimeout(() => {
             saveMessage.innerText = "";
         }, 3000);
-    }
+    };
 
     fetch("/notes", {
         method: "POST",
@@ -33,4 +33,4 @@ saveButton.addEventListener("click", (event) => {
             "Content-Type": "application/json"
         }
     }).then(handleSuccess).catch(handleError);
-})
+});

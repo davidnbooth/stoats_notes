@@ -1,14 +1,24 @@
 import process from "process";
 import pino from "pino";
 
-const Logger = pino();
+// const Logger = pino();
+
+                                    
+import fs from "fs";
+
+const fileName = "logs/log.txt";
+const Logger = {
+    warn: (input: string) => fs.appendFileSync(fileName, input),
+    info: (input: string) => fs.appendFileSync(fileName, input),
+    error: (input: string) => fs.appendFileSync(fileName, input),
+};
 
 
 // Nice exit handling (logs uncaught errors!)
 // Taken from: https://blog.heroku.com/best-practices-nodejs-errors
 const exitHandler = (code: number, reason: string) => (err: Error) => {
     if (err && err instanceof Error) {
-        Logger.error(new Error(`exitError ${code}: ${reason}`)); //, {cause: err}))
+        Logger.error((new Error(`exitError ${code}: ${reason}`)).toString()); //, {cause: err}))
     }
 
     // server.close(() => process.exit(code))  // attempt graceful shutdown

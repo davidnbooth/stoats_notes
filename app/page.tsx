@@ -14,7 +14,7 @@ export default async function Home({}) {
         db = await DBConnection.getConnection();
     } catch (err) {
         const newErr = new Error(`${(new Date()).toISOString()}: Home - error connecting to DB`, {cause: err});
-        Logger.error(newErr);
+        Logger.error(newErr.toString());
         throw newErr;
     }
     Logger.info(`${(new Date()).toISOString()}: Home - connected to DB`);
@@ -24,7 +24,7 @@ export default async function Home({}) {
         noteQueryResult = await db.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
     } catch (err) {
         const newErr = new Error(`${(new Date()).toISOString()}: Home - error querying DB for note content`, {cause: err});
-        Logger.error(newErr);
+        Logger.error(newErr.toString());
         throw newErr;
     }
 

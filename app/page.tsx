@@ -8,22 +8,22 @@ const noteId = 1;
 const tableName = "Notes";
 
 export default async function Home({}) {
-    Logger.info(`${(new Date()).toISOString()}: Home - visited`);
+    Logger.info("Home - visited");
     let db: PoolConnection;
     try {
         db = await DBConnection.getConnection();
     } catch (err) {
-        const newErr = new Error(`${(new Date()).toISOString()}: Home - error connecting to DB`, {cause: err});
+        const newErr = new Error("Home - error connecting to DB", {cause: err});
         Logger.error(newErr);
         throw newErr;
     }
-    Logger.info(`${(new Date()).toISOString()}: Home - connected to DB`);
+    Logger.info("Home - connected to DB");
     
     let noteQueryResult: any;  // TODO
     try {
         noteQueryResult = await db.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
     } catch (err) {
-        const newErr = new Error(`${(new Date()).toISOString()}: Home - error querying DB for note content`, {cause: err});
+        const newErr = new Error("Home - error querying DB for note content", {cause: err});
         Logger.error(newErr);
         throw newErr;
     }
@@ -33,7 +33,7 @@ export default async function Home({}) {
         await db.query(`INSERT INTO ${tableName} (NoteID, Content) VALUES (${noteId}, ${usNoteContent})`);
     } 
     usNoteContent = noteQueryResult[0].Content;
-    Logger.info(`${(new Date()).toISOString()}: Home - established note content, rendering view`);
+    Logger.info("Home - established note content, rendering view");
 
     return (
         <main>

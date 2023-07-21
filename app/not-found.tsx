@@ -3,7 +3,7 @@ import styles from "./not-found.module.scss";
 import Logger from "../lib/Logger"; 
 
 export default function NotFound() {
-    Logger.info(`${(new Date()).toISOString()}: 404 | Not Found`);
+    Logger.info("404 | Not Found - page visited");
 
     return (
         <div id={styles["container"]}>

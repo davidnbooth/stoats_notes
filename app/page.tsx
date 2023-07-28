@@ -7,6 +7,8 @@ import Logger from "../lib/Logger";
 const noteId = 1;
 const tableName = "Notes";
 
+export const revalidate = 0;  // don't cache this page!
+
 export default async function Home({}) {
     Logger.info("Home - visited");
     let db: PoolConnection;

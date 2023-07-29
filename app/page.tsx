@@ -44,7 +44,7 @@ export default async function Home({}) {
                 <textarea id={styles["note"]} name="note" defaultValue={usNoteContent}>
                 </textarea>
                 <br />
-                <button id={styles["note-save"]} type="button">Save</button><span id={styles["save-message"]}></span>
+                <span id={styles["save-message"]}></span>
             </form>
             <script defer src="/page.js" />
         </main>

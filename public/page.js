@@ -1,36 +1,36 @@
-const saveButton = document.querySelector("button");
-const saveMessage = document.querySelector("span");
+const statusBox = document.querySelector("span");
 const note = document.querySelector("textarea");
 
-saveButton.addEventListener("click", (event) => {
-    event.preventDefault();
+const timeoutToSave = 1000;
 
+const saveNote = async () => {
+    statusBox.innerHTML = "Saving...";
     const usNoteContent = note.value;
-    const handleError = (error) => {
-        console.warn(error);
-        saveMessage.innerText = "Error!";
-        setTimeout(() => {
-            saveMessage.innerText = "";
-        }, 3000);
-    };
-
-    const handleSuccess = (response) => {
-        if (!response.ok) {
-            handleError(response.statusText);
-            return;
+    
+    try {
+        const saveResponse = await fetch("/notes", {
+            method: "POST",
+            body: JSON.stringify({ note: usNoteContent }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (!saveResponse.ok) {
+            throw new Error(saveResponse.statusText);
         }
+        statusBox.innerHTML = "Saved.";
+    } catch (err) {
+        console.warn(err);
+        statusBox.innerHTML = "Error!";
+        return;
+    }
+};
 
-        saveMessage.innerText = "Saved!";
-        setTimeout(() => {
-            saveMessage.innerText = "";
-        }, 3000);
-    };
-
-    fetch("/notes", {
-        method: "POST",
-        body: JSON.stringify({ note: usNoteContent }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(handleSuccess).catch(handleError);
+let timeoutId = null;
+note.addEventListener("input", (event) => {
+    statusBox.innerHTML = "Editing...";
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(saveNote, timeoutToSave);
 });

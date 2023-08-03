@@ -1,5 +1,5 @@
-import DBConnection from "../../lib/DBConnection";
-import Logger from "../../lib/Logger";
+import DBConnection from "../../../lib/DBConnection";
+import Logger from "../../../lib/Logger";
 
 const tableName = "Notes";
 const noteId = 1;

@@ -8,7 +8,7 @@ const saveNote = async () => {
     const usNoteContent = note.value;
     
     try {
-        const saveResponse = await fetch("/notes", {
+        const saveResponse = await fetch("/api/notes", {
             method: "POST",
             body: JSON.stringify({ note: usNoteContent }),
             headers: {

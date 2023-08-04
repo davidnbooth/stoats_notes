@@ -7,34 +7,47 @@ import Logger from "../lib/Logger";
 const noteId = 1;
 const tableName = "Notes";
 
+const defaultNoteContent = "\"Your note here\"";
+
 export const revalidate = 0;  // don't cache this page!
 
 export default async function Home({}) {
     Logger.info("Home - visited");
-    let db: PoolConnection;
+
+    let noteQueryResult: Array<{NoteId: number, Content: string}>;
+    let usNoteContent: string;
+    
+    // Open a connection to the database
+    let dbConn: PoolConnection;
     try {
-        db = await DBConnection.getConnection();
+        dbConn = await DBConnection.getConnection();
+        Logger.info("Home - connected to DB");
     } catch (err) {
         const newErr = new Error("Home - error connecting to DB", {cause: err});
         Logger.error(newErr);
         throw newErr;
     }
-    Logger.info("Home - connected to DB");
-    
-    let noteQueryResult: any;  // TODO
+
+    // Get the note content, or create it using the default content if it doesn't exist
     try {
-        noteQueryResult = await db.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
+        noteQueryResult = await dbConn.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
+        Logger.info(`Home - retrieved note content for note ${noteId} from table ${tableName}`);
+        if (noteQueryResult[0]?.Content) {
+            usNoteContent = noteQueryResult[0].Content;
+        } else {
+            await dbConn.query(`INSERT INTO ${tableName} (NoteID, Content) VALUES (${noteId}, ${defaultNoteContent})`);
+            usNoteContent = defaultNoteContent;
+            Logger.info(`Home - saved default note content into note ${noteId} from table ${tableName}`);
+        }
     } catch (err) {
-        const newErr = new Error("Home - error querying DB for note content", {cause: err});
+        const newErr = new Error("Home - error querying for note content", {cause: err});
         Logger.error(newErr);
         throw newErr;
+    } finally {
+        if (dbConn)
+            dbConn.release();
     }
 
-    let usNoteContent = "\"Your note here\"";
-    if (!noteQueryResult[0]?.Content) {
-        await db.query(`INSERT INTO ${tableName} (NoteID, Content) VALUES (${noteId}, ${usNoteContent})`);
-    } 
-    usNoteContent = noteQueryResult[0].Content;
     Logger.info("Home - established note content, rendering view");
 
     return (

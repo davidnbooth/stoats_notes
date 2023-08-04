@@ -1,18 +1,17 @@
-import { createPool, PoolConnection, PoolConfig } from "mariadb";
+import { createPool, Pool, PoolConfig } from "mariadb";
 import fs from "fs";
 import os from "os";
 
 const dbHosts = {"development": "localhost", "production": "stoatsnotes.db"};
 
-const defaultTableName = "Notes";
 const defaultSecrets = JSON.parse(fs.readFileSync("secrets.json").toString());
 const defaultMode = os.hostname().includes("nfshost") ? "production" : "development";
 
-let defaultConnection: PoolConnection;
+let defaultPool: Pool;
 
 
 const DBConnection = {
-    makeNewConnectionWithTable: async (mode?: "development"|"production", secrets?: {sql_user: string, sql_password: string}, tableName?: string): Promise<PoolConnection> => {
+    makeNewPool: async (mode?: "development"|"production", secrets?: {sql_user: string, sql_password: string}): Promise<Pool> => {
         const dbHost = dbHosts[mode || defaultMode];
 
         const connectionOptions: PoolConfig = {
@@ -23,18 +22,15 @@ const DBConnection = {
         };
 
         const pool = await createPool(connectionOptions);
-        const connection = await pool.getConnection();
-        await connection.query(`CREATE TABLE IF NOT EXISTS ${tableName || defaultTableName} (NoteID INT PRIMARY KEY, Content TEXT)`);
-        return connection;
+        return pool;
     },
 
     getConnection: async (mode?: "development"|"production", secrets?: {sql_user: string, sql_password: string}) => {
-        if (defaultConnection) {
-            return defaultConnection;
-        }
+        if (!defaultPool)
+            defaultPool = await DBConnection.makeNewPool(mode, secrets);
 
-        defaultConnection = await DBConnection.makeNewConnectionWithTable(mode, secrets, defaultTableName);
-        return defaultConnection;
+        const connection = await defaultPool.getConnection();
+        return connection;
     },
 
 };

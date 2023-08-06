@@ -59,7 +59,13 @@ export default async function Home({}) {
                 <br />
                 <span id={styles["save-message"]}></span>
             </form>
-            <script defer src="/page.js" />
+            <script
+                id="note-page-js"
+                defer
+                src="/page.js"
+                data-textarea-id={styles["note"]}
+                data-editing-style={styles["editing"]}
+            />
         </main>
     );
 }

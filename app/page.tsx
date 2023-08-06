@@ -64,6 +64,9 @@ export default async function Home({}) {
                 defer
                 src="/page.js"
                 data-textarea-id={styles["note"]}
+                data-saving-style={styles["saving"]}
+                data-saved-style={styles["saved"]}
+                data-error-style={styles["error"]}
                 data-editing-style={styles["editing"]}
             />
         </main>

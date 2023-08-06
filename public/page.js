@@ -2,26 +2,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const thisScriptTag = document.getElementById("note-page-js");
     const textareaId = thisScriptTag.getAttribute("data-textarea-id");
     const editingStyle = thisScriptTag.getAttribute("data-editing-style");
+    const savingStyle = thisScriptTag.getAttribute("data-saving-style");
+    const savedStyle = thisScriptTag.getAttribute("data-saved-style");
+    const errorStyle = thisScriptTag.getAttribute("data-error-style");
 
     const statusBox = document.querySelector("span");
     const note = document.getElementById(textareaId);
     
     const timeoutToSave = 1000;
     
-    /**
-     * @param {"saving"|"saved"|"editing"|"error"} state 
-     */
     const setNoteState = (state) => {
-        note.classList.remove("saving");
-        note.classList.remove("saved");
+        note.classList.remove(savingStyle);
+        note.classList.remove(savedStyle);
         note.classList.remove(editingStyle);
-        note.classList.remove("error");
+        note.classList.remove(errorStyle);
         note.classList.add(state);
     };
     
     const saveNote = async () => {
         statusBox.innerHTML = "Saving...";
-        setNoteState("saving");
+        setNoteState(savingStyle);
         const usNoteContent = note.value;
         
         try {
@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(saveResponse.statusText);
             }
             statusBox.innerHTML = "Saved.";
-            setNoteState("saved");
+            setNoteState(savedStyle);
         } catch (err) {
             console.warn(err);
             statusBox.innerHTML = "Error!";
-            setNoteState("error");
+            setNoteState(errorStyle);
             return;
         }
     };

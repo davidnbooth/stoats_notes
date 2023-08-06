@@ -1,4 +1,3 @@
 #!/bin/bash
-cd /home/protected
-npm run build
+echo "$(date) - run.sh started"
 npm run start --run-in-foreground

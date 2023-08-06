@@ -52,7 +52,7 @@ export default async function Home({}) {
 
     return (
         <main>
-            <h2>Welcome to Stoats Notes!  I&apos;m testing a change!!!</h2>
+            <h2>Welcome to Stoats Notes!  I&apos;m testing another change!!!</h2>
             <form>
                 <textarea id={styles["note"]} name="note" defaultValue={usNoteContent}>
                 </textarea>

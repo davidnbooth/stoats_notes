@@ -1,0 +1,9 @@
+#!/bin/sh
+COMMIT=$(git log -1 HEAD | head -n 1 | cut -d ' ' -f2)
+MESSAGE=$(git log --format=%B -n 1 $COMMIT | xargs echo )
+BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+
+cd /home/protected
+npm run build > buildLog.txt
+
+echo -e "$COMMIT\n$MESSAGE\n$BRANCH" > latestCommit.txt

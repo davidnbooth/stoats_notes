@@ -1,6 +1,12 @@
 #!/bin/bash
 echo "$(date) - run.sh started"
-npm run start --run-in-foreground
+
+# Function to start the Next.js server
+start_server() {
+  npm run start --run-in-foreground &
+  server_pid=$!
+}
+start_server
 
 # Path to the file you want to watch
 file_to_watch="/home/protected/latestCommit.txt"
@@ -18,7 +24,8 @@ while true; do
     # Compare the current checksum with the initial checksum
     if [ "$current_checksum" != "$initial_checksum" ]; then
         echo "$(date) - File $file_to_watch has changed. Restarting server..."
-        npm run start --run-in-foreground
+        kill $server_pid
+        start_server
 
         # Update the initial_checksum to the current_checksum for the next iteration
         initial_checksum="$current_checksum"

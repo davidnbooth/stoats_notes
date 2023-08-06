@@ -10,16 +10,16 @@
     color: $text-color;
 }
 .editing {
-    border: 14px solid darkgoldenrod !important;
+    border: 1px solid darkgoldenrod !important;
 }
 .saving {
-    border: 14px solid pink !important;
+    border: 1px solid pink !important;
 }
 .saved {
-    border: 14px solid green !important;
+    border: 1px solid green !important;
 }
 .error {
-    border: 14px solid red !important;
+    border: 1px solid red !important;
 }
 
 #save-message {

@@ -18,6 +18,6 @@
 
 1. Multiple notes
 
-1. Create a typedef file for the database tables
+1. Create a typedef file for the database tables, with the json schemas
 2. Setup script for db, e.g.
 `await connection.query("CREATE TABLE IF NOT EXISTS Notes (NoteID INT PRIMARY KEY, Content TEXT)");`

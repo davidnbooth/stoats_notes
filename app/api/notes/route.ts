@@ -2,7 +2,7 @@ import DBConnection from "../../../lib/DBConnection";
 import Logger from "../../../lib/Logger";
 import fs from "fs";
 
-const tableName = "Notes";
+const tableName = "notes";
 
 export async function POST(request: Request) {
     const body = await request.json();

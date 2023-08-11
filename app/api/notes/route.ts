@@ -1,8 +1,8 @@
 import DBConnection from "../../../lib/DBConnection";
 import Logger from "../../../lib/Logger";
+import fs from "fs";
 
 const tableName = "Notes";
-const noteId = 1;
 
 export async function POST(request: Request) {
     const body = await request.json();
@@ -11,7 +11,11 @@ export async function POST(request: Request) {
 
     const dbConn = await DBConnection.getConnection();
     try {
-        await dbConn.query(`UPDATE ${tableName} SET Content = '${usNoteContent}' WHERE NoteID = ${noteId}`);
+        // await dbConn.query(`UPDATE ${tableName} SET Content = '${usNoteContent}' WHERE NoteID = ${noteId}`);
+        const notes = await dbConn.query(`SELECT * FROM ${tableName}`);
+        const noteId = notes[0].id;
+        fs.writeFileSync(`notes/${noteId}`, usNoteContent);
+
     } catch (err) {
         const newErr = new Error("Error in note save request", {cause: err});
         Logger.error(newErr);

@@ -3,18 +3,18 @@ import styles from "./page.module.scss";
 
 import DBConnection from "../lib/DBConnection";
 import Logger from "../lib/Logger";
+import fs from "fs";
 
-const noteId = 1;
 const tableName = "Notes";
 
-const defaultNoteContent = "\"Your note here\"";
+const defaultNoteContent = "File created by Stoats Notes";
 
 export const revalidate = 0;  // don't cache this page!
 
 export default async function Home({}) {
     Logger.info("Home - visited");
 
-    let noteQueryResult: Array<{NoteId: number, Content: string}>;
+    let noteQueryResult: Array<{id: number}>;
     let usNoteContent: string;
     
     // Open a connection to the database
@@ -30,15 +30,17 @@ export default async function Home({}) {
 
     // Get the note content, or create it using the default content if it doesn't exist
     try {
-        noteQueryResult = await dbConn.query(`SELECT * FROM ${tableName} WHERE NoteID = ${noteId}`);
+        noteQueryResult = await dbConn.query(`SELECT * FROM ${tableName}`);
+        const noteId = noteQueryResult[0]?.id;
         Logger.info(`Home - retrieved note content for note ${noteId} from table ${tableName}`);
-        if (noteQueryResult[0]?.Content) {
-            usNoteContent = noteQueryResult[0].Content;
-        } else {
-            await dbConn.query(`INSERT INTO ${tableName} (NoteID, Content) VALUES (${noteId}, ${defaultNoteContent})`);
-            usNoteContent = defaultNoteContent;
+
+        if (!fs.existsSync(`notes/${noteId}`)) {
+            fs.writeFileSync(`notes/${noteId}`, defaultNoteContent);
             Logger.info(`Home - saved default note content into note ${noteId} from table ${tableName}`);
         }
+
+        usNoteContent = fs.readFileSync(`notes/${noteId}`, "utf-8");
+
     } catch (err) {
         const newErr = new Error("Home - error querying for note content", {cause: err});
         Logger.error(newErr);

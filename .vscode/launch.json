@@ -1,6 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
+    {
+      "name": "createTables",
+      "program": "${workspaceFolder}/serverSetup/createTables.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
       {
         "name": "Next.js: debug server-side",
         "type": "node-terminal",
